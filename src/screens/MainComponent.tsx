@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     marginBottom: 20,
-    marginRight: 20,
+    marginRight: 10,
   },
   statuses: {
     flexDirection: 'row',

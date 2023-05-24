@@ -1,9 +1,21 @@
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {ThemeContext} from '../context/ThemeContext';
 import {useDispatch, useSelector} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
-import {RootState, Todo, toggleTodo} from '../redux/store/todoSlice';
+import {
+  RootState,
+  Todo,
+  deleteTodo,
+  toggleTodo,
+} from '../redux/store/todoSlice';
 
 const Incomplete = () => {
   const {theme} = useContext(ThemeContext);
@@ -16,6 +28,10 @@ const Incomplete = () => {
 
   const toggleTodoHandler = (id: number) => {
     dispatch(toggleTodo(id));
+  };
+
+  const deleteTodoHandler = (id: number) => {
+    dispatch(deleteTodo(id));
   };
 
   return (
@@ -50,6 +66,9 @@ const Incomplete = () => {
                   <Text style={[styles.textItemCategory]}>{todo.category}</Text>
                 </View>
               </Pressable>
+              <TouchableOpacity onPress={() => deleteTodoHandler(todo.id)}>
+                <Text style={styles.deleteButtonText}>Delete</Text>
+              </TouchableOpacity>
             </View>
           ))}
       </View>
@@ -78,7 +97,8 @@ const styles = StyleSheet.create({
   },
   mappedWrapper: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     columnGap: 8,
   },
   pressableStyle: {
@@ -103,10 +123,13 @@ const styles = StyleSheet.create({
   textItemCategory: {
     fontSize: 12,
     color: '#575767',
-    fontWeight: '600',
+    fontWeight: '500',
   },
   categoriesStyle: {
     flexDirection: 'column',
     rowGap: 2,
+  },
+  deleteButtonText: {
+    color: 'tomato',
   },
 });

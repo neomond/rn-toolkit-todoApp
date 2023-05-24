@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   textItemCategory: {
     fontSize: 12,
     color: '#575767',
-    fontWeight: '600',
+    fontWeight: '500',
   },
   categoriesStyle: {
     flexDirection: 'column',

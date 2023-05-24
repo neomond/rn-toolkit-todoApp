@@ -3,7 +3,7 @@ import {createSlice, PayloadAction, configureStore} from '@reduxjs/toolkit';
 export interface Todo {
   id: number;
   title: string;
-  category: string; // New category property
+  category: string;
   completed: boolean;
 }
 
@@ -28,10 +28,13 @@ const todoSlice = createSlice({
         todo.completed = !todo.completed;
       }
     },
+    deleteTodo: (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+    },
   },
 });
 
-export const {addTodo, toggleTodo} = todoSlice.actions;
+export const {addTodo, toggleTodo, deleteTodo} = todoSlice.actions;
 
 export const store = configureStore({
   reducer: todoSlice.reducer,
