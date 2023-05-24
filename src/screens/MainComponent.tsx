@@ -26,10 +26,11 @@ const MainComponent: React.FC = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state: RootState) => state.todos);
 
-  const handleAddTask = (task: string) => {
+  const handleAddTask = (task: {task: string; category: string}) => {
     const newTodo = {
       id: Math.floor(Math.random() * 1000),
-      title: task,
+      title: task.task,
+      category: task.category,
       completed: false,
     };
     dispatch(addTodo(newTodo));

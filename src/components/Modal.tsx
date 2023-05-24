@@ -12,15 +12,21 @@ import {
 interface TaskModalProps {
   visible: boolean;
   onClose: () => void;
-  onAddTask: (task: string) => void;
+  onAddTask: (task: {task: string; category: string}) => void;
 }
 
 const TaskModal: React.FC<TaskModalProps> = ({visible, onClose, onAddTask}) => {
   const [taskInput, setTaskInput] = useState('');
+  const [categoryInput, setCategoryInput] = useState('');
 
   const handleAddTask = () => {
-    onAddTask(taskInput);
+    const newTask = {
+      task: taskInput,
+      category: categoryInput,
+    };
+    onAddTask(newTask);
     setTaskInput('');
+    setCategoryInput('');
   };
 
   const handleOverlayPress = () => {
@@ -39,6 +45,12 @@ const TaskModal: React.FC<TaskModalProps> = ({visible, onClose, onAddTask}) => {
                 placeholder="Enter task"
                 value={taskInput}
                 onChangeText={text => setTaskInput(text)}
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter category"
+                value={categoryInput}
+                onChangeText={text => setCategoryInput(text)}
               />
               <View
                 style={{

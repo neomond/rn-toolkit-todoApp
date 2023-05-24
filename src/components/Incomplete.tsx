@@ -6,7 +6,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {RootState, Todo, toggleTodo} from '../redux/store/todoSlice';
 
 const Incomplete = () => {
-  const {isDarkMode, toggleTheme, theme} = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
   const data = useSelector((state: RootState) =>
     state.todos.filter((todo: Todo) => !todo.completed),
@@ -28,11 +28,7 @@ const Incomplete = () => {
           data.map((todo: Todo) => (
             <View style={styles.mappedWrapper} key={todo.id}>
               <Pressable
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  columnGap: 12,
-                }}
+                style={styles.mappeddataValue}
                 onPress={() => toggleTodoHandler(todo.id)}>
                 <CheckBox
                   disabled={false}
@@ -45,11 +41,14 @@ const Incomplete = () => {
                   ]}
                   onValueChange={newValue => setToggleCheckBox(newValue)}
                 />
-                <Text
-                  key={todo.id}
-                  style={[styles.textItem, {color: theme.textColor}]}>
-                  {todo.title}
-                </Text>
+                <View style={styles.categoriesStyle}>
+                  <Text
+                    key={todo.id}
+                    style={[styles.textItem, {color: theme.textColor}]}>
+                    {todo.title}
+                  </Text>
+                  <Text style={[styles.textItemCategory]}>{todo.category}</Text>
+                </View>
               </Pressable>
             </View>
           ))}
@@ -76,18 +75,21 @@ const styles = StyleSheet.create({
   },
   checkBoxWrapper: {
     flexDirection: 'column',
-    rowGap: 12,
   },
   mappedWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
     columnGap: 8,
   },
   pressableStyle: {
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: 12,
+  },
+  mappeddataValue: {
+    flexDirection: 'row',
+    columnGap: 12,
+    marginBottom: 8,
   },
   checkbox: {
     width: 20,
@@ -96,5 +98,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#DADADA',
     backgroundColor: '#2B2D37',
+  },
+
+  textItemCategory: {
+    fontSize: 12,
+    color: '#575767',
+    fontWeight: '600',
+  },
+  categoriesStyle: {
+    flexDirection: 'column',
+    rowGap: 2,
   },
 });

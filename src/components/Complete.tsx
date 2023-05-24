@@ -42,9 +42,12 @@ const Complete = () => {
                 boxType="square"
                 onValueChange={newValue => setToggleCheckBox(newValue)}
               />
-              <Text style={[styles.textItem, {color: theme.textColor}]}>
-                {todo.title}
-              </Text>
+              <View style={styles.categoriesStyle}>
+                <Text style={[styles.textItem, {color: theme.textColor}]}>
+                  {todo.title}
+                </Text>
+                <Text style={[styles.textItemCategory]}>{todo.category}</Text>
+              </View>
             </Pressable>
           ))}
         </View>
@@ -74,7 +77,6 @@ const styles = StyleSheet.create({
   mappeddataValue: {
     flexDirection: 'row',
     columnGap: 12,
-    alignItems: 'center',
     marginBottom: 8,
   },
   checkbox: {
@@ -84,5 +86,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#DADADA',
     backgroundColor: '#141419',
+  },
+  textItemCategory: {
+    fontSize: 12,
+    color: '#575767',
+    fontWeight: '600',
+  },
+  categoriesStyle: {
+    flexDirection: 'column',
+    rowGap: 2,
   },
 });

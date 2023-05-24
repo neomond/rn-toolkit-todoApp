@@ -3,6 +3,7 @@ import {createSlice, PayloadAction, configureStore} from '@reduxjs/toolkit';
 export interface Todo {
   id: number;
   title: string;
+  category: string; // New category property
   completed: boolean;
 }
 
